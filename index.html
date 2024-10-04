@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stream Quran audio beautifully from Saud Al-Shuraim">
+  <title>Quran Audio Streamer - Saud Al-Shuraim</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #16222a, #3a6073);
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    
+    header {
+      background-color: #1e3c4a;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #f8f9fa;
+    }
+
+    .audio-container {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    .audio-title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #f1c40f;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+    }
+
+    .parah-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .parah-list li {
+      margin: 10px 0;
+    }
+
+    .parah-list button {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .parah-list button:hover {
+      background-color: #e67e22;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #1e3c4a;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <h1>Quran Audio Streamer - Saud Al-Shuraim</h1>
+  </header>
+
+  <!-- Audio Player Section -->
+  <div class="audio-container">
+    <h2 class="audio-title" id="current-title">Select a Parah to Play</h2>
+    <audio id="audio-player" controls>
+      <source id="audio-source" src="" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <!-- List of Parahs -->
+    <ul class="parah-list" id="parah-list"></ul>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 QuranAudioStreamer. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Array of Parah file names
+    const parahs = Array.from({length: 30}, (_, i) => ('0' + (i + 1)).slice(-2) + '.mp3');
+    
+    const baseUrl = 'https://aswaatulqurraa.com/downloads/quran-audio/quran-in-parahs/s/saud-al-shuraim/';
+    const parahList = document.getElementById('parah-list');
+    const audioPlayer = document.getElementById('audio-player');
+    const audioSource = document.getElementById('audio-source');
+    const currentTitle = document.getElementById('current-title');
+
+    // Function to change audio
+    function playParah(parah, index) {
+      audioSource.src = baseUrl + parah;
+      audioPlayer.load();
+      currentTitle.innerText = 'Playing Parah ' + (index + 1);
+    }
+
+    // Generate the list of Parahs
+    parahs.forEach((parah, index) => {
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.innerText = 'Play Parah ' + (index + 1);
+      button.onclick = () => playParah(parah, index);
+      li.appendChild(button);
+      parahList.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>
